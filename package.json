@@ -1,6 +1,7 @@
 {
   "name": "chakra-audio-player",
   "version": "1.0.0",
+  "homepage": "https://ningaro.github.io/chakra-audio-player",
   "dependencies": {
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11",

@@ -5,6 +5,9 @@ const styles: ChakraTheme['styles'] = {
     'html, body, #root': {
       height: '100%',
     },
+    '*:focus': {
+      boxShadow: 'none!important',
+    },
   }),
 }
 

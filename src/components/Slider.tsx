@@ -3,13 +3,22 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
+  type SliderProps as ChakraSliderProps,
 } from '@chakra-ui/react'
 
-export default function Slider() {
+interface SliderProps extends ChakraSliderProps {}
+
+export default function Slider({ max, value }: SliderProps) {
   return (
-    <ChakraSlider aria-label="slider-ex-1" defaultValue={30}>
+    <ChakraSlider
+      min={0}
+      max={max}
+      aria-label="slider-ex-1"
+      value={value}
+      focusThumbOnChange={false}
+    >
       <SliderTrack>
-        <SliderFilledTrack />
+        <SliderFilledTrack bg="teal.400" />
       </SliderTrack>
       <SliderThumb />
     </ChakraSlider>

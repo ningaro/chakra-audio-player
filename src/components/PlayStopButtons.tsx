@@ -1,12 +1,20 @@
-import { ButtonGroup, Icon, IconButton } from '@chakra-ui/react'
-import { RiPlayLine, RiPauseLine } from 'react-icons/ri'
+import { Icon, IconButton, type IconButtonProps } from '@chakra-ui/react'
+import { RiPlayFill, RiPauseFill } from 'react-icons/ri'
 
 import type { AudioPlayerComponent } from '../screens/Root'
 
 // Types
-interface PlayStopButtonsProps extends AudioPlayerComponent {}
+interface PlayStopButtonsProps extends AudioPlayerComponent, IconButtonProps {
+  isPlaying: boolean
+}
 
-export default function PlayStopButtons({ audioPlayer }: PlayStopButtonsProps) {
+export default function PlayStopButtons({
+  isPlaying,
+  audioPlayer,
+  color,
+  colorScheme,
+  variant,
+}: PlayStopButtonsProps) {
   const handlePlay = () => {
     if (audioPlayer?.current) audioPlayer?.current?.play()
   }
@@ -15,17 +23,13 @@ export default function PlayStopButtons({ audioPlayer }: PlayStopButtonsProps) {
   }
 
   return (
-    <ButtonGroup isAttached variant="outline">
-      <IconButton
-        onClick={handlePlay}
-        aria-label="Play audio"
-        icon={<Icon as={RiPlayLine} />}
-      />
-      <IconButton
-        onClick={handlePause}
-        aria-label="Pause audio"
-        icon={<Icon as={RiPauseLine} />}
-      />
-    </ButtonGroup>
+    <IconButton
+      colorScheme={colorScheme}
+      variant={variant}
+      color={color}
+      onClick={isPlaying ? handlePause : handlePlay}
+      aria-label="Play/Pause button"
+      icon={<Icon as={isPlaying ? RiPauseFill : RiPlayFill} />}
+    />
   )
 }

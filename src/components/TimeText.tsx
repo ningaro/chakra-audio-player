@@ -1,4 +1,4 @@
-import { Text, TextProps } from '@chakra-ui/react'
+import { Text, Stack, Spacer, TextProps } from '@chakra-ui/react'
 
 interface TimeTextProps extends TextProps {
   duration: number
@@ -17,8 +17,16 @@ export default function TimeText({
   duration,
 }: TimeTextProps) {
   return (
-    <Text color={color} size="sm">
-      {getPrettyTime(currentTime)} / {getPrettyTime(duration)}
-    </Text>
+    <Stack direction="row" color={color} w="100%">
+      <Text flex="10" size="sm" textAlign="right">
+        {getPrettyTime(currentTime)}
+      </Text>
+      <Text flex="1" size="sm" textAlign="center">
+        /
+      </Text>
+      <Text flex="10" size="sm" textAlign="left">
+        {getPrettyTime(duration)}
+      </Text>
+    </Stack>
   )
 }

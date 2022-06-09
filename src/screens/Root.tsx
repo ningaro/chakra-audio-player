@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { useRef, useState, type RefObject, SyntheticEvent } from 'react'
-import { Center, Text, Stack } from '@chakra-ui/react'
+import { Center, Stack } from '@chakra-ui/react'
 
 // Components
 import Slider from '../components/Slider'
@@ -16,8 +16,8 @@ export interface AudioPlayerComponent {
 }
 
 export default function Root() {
-  const exampleAudio =
-    'https://file-examples.com/storage/fe70afa24f62a2494a35c65/2017/11/file_example_MP3_700KB.mp3'
+  /*  const exampleAudio =
+    'https://file-examples.com/storage/fe70afa24f62a2494a35c65/2017/11/file_example_MP3_700KB.mp3' */
   const playerElem = useRef<HTMLAudioElement>(null)
 
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
@@ -27,8 +27,6 @@ export default function Root() {
   const handlePlay = () => setIsPlaying(true)
   const handlePause = () => setIsPlaying(false)
   const handleMeta = (e: SyntheticEvent<HTMLAudioElement>) => {
-    console.log(e.currentTarget.currentTime)
-
     setCurrentTime(e.currentTarget.currentTime)
     setDuration(e.currentTarget.duration)
   }

@@ -1,4 +1,4 @@
-import { Text, Stack, Spacer, TextProps } from '@chakra-ui/react'
+import { Text, Stack, TextProps } from '@chakra-ui/react'
 
 interface TimeTextProps extends TextProps {
   duration: number

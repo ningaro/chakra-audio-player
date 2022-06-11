@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.js": "/chakra-audio-player/static/js/main.4e849149.js",
+    "main.js": "/chakra-audio-player/static/js/main.60eba305.js",
+    "static/media/file_example.mp3": "/chakra-audio-player/static/media/file_example.8d14102f3e5d724f1908.mp3",
     "index.html": "/chakra-audio-player/index.html",
-    "main.4e849149.js.map": "/chakra-audio-player/static/js/main.4e849149.js.map"
+    "main.60eba305.js.map": "/chakra-audio-player/static/js/main.60eba305.js.map"
   },
   "entrypoints": [
-    "static/js/main.4e849149.js"
+    "static/js/main.60eba305.js"
   ]
 }

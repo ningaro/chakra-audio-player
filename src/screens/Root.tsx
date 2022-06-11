@@ -5,10 +5,10 @@ import { Center, Stack } from '@chakra-ui/react'
 // Components
 import Slider from '../components/Slider'
 import PlayStopButtons from '../components/PlayStopButtons'
+import TimeText from '../components/TimeText'
 
 // music
 import song from '../assets/music/file_example.mp3'
-import TimeText from '../components/TimeText'
 
 // Types
 export interface AudioPlayerComponent {
@@ -26,9 +26,14 @@ export default function Root() {
 
   const handlePlay = () => setIsPlaying(true)
   const handlePause = () => setIsPlaying(false)
-  const handleMeta = (e: SyntheticEvent<HTMLAudioElement>) => {
+  const handleMetaUpdate = (e: SyntheticEvent<HTMLAudioElement>) => {
     setCurrentTime(e.currentTarget.currentTime)
     setDuration(e.currentTarget.duration)
+  }
+
+  const setPlayerCurrentTime = (time: number) => {
+    if (playerElem?.current !== undefined)
+      playerElem!.current!.currentTime = time
   }
 
   return (
@@ -44,7 +49,8 @@ export default function Root() {
         <audio
           onPlay={handlePlay}
           onPause={handlePause}
-          onTimeUpdate={handleMeta}
+          onTimeUpdate={handleMetaUpdate}
+          onLoadedMetadata={handleMetaUpdate}
           ref={playerElem}
           src={song}
         >
@@ -60,7 +66,11 @@ export default function Root() {
               isPlaying={isPlaying}
               audioPlayer={playerElem}
             />
-            <Slider max={duration || 1} value={currentTime} />
+            <Slider
+              updatePlayerTime={setPlayerCurrentTime}
+              max={duration || 1}
+              value={currentTime}
+            />
           </Stack>
           <TimeText
             color="teal.600"

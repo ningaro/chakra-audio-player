@@ -6,6 +6,7 @@ import { Center, Stack } from '@chakra-ui/react'
 import Slider from '../components/Slider'
 import PlayStopButtons from '../components/PlayStopButtons'
 import TimeText from '../components/TimeText'
+import SoundSettings from '../components/SoundSettings'
 
 // music
 import song from '../assets/music/file_example.mp3'
@@ -23,6 +24,7 @@ export default function Root() {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const [duration, setDuration] = useState<number>(0)
   const [currentTime, setCurrentTime] = useState<number>(0)
+  const [volume, setVolume] = useState<number>(0)
 
   const handlePlay = () => setIsPlaying(true)
   const handlePause = () => setIsPlaying(false)
@@ -30,10 +32,20 @@ export default function Root() {
     setCurrentTime(e.currentTarget.currentTime)
     setDuration(e.currentTarget.duration)
   }
+  const handleTimeUpdate = (e: SyntheticEvent<HTMLAudioElement>) => {
+    setCurrentTime(e.currentTarget.currentTime)
+  }
+  const handleVolumeUpdate = (e: SyntheticEvent<HTMLAudioElement>) => {
+    setVolume(e.currentTarget.volume * 100)
+  }
 
   const setPlayerCurrentTime = (time: number) => {
     if (playerElem?.current !== undefined)
       playerElem!.current!.currentTime = time
+  }
+  const setPlayerVolume = (soundLevel: number) => {
+    if (playerElem?.current !== undefined)
+      playerElem!.current!.volume = soundLevel / 100
   }
 
   return (
@@ -44,13 +56,14 @@ export default function Root() {
         spacing={8}
         minW="320px"
         px={4}
-        py={8}
+        py={2}
       >
         <audio
           onPlay={handlePlay}
           onPause={handlePause}
-          onTimeUpdate={handleMetaUpdate}
+          onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleMetaUpdate}
+          onVolumeChange={handleVolumeUpdate}
           ref={playerElem}
           src={song}
         >
@@ -67,9 +80,16 @@ export default function Root() {
               audioPlayer={playerElem}
             />
             <Slider
-              updatePlayerTime={setPlayerCurrentTime}
+              updateGlobalNum={setPlayerCurrentTime}
               max={duration || 1}
               value={currentTime}
+            />
+            <SoundSettings
+              variant="ghost"
+              colorScheme="teal"
+              colors="teal.200"
+              value={volume}
+              updateGlobalNum={setPlayerVolume}
             />
           </Stack>
           <TimeText

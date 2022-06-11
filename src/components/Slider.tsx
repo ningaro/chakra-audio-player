@@ -6,13 +6,21 @@ import {
   type SliderProps as ChakraSliderProps,
 } from '@chakra-ui/react'
 
-interface SliderProps extends ChakraSliderProps {
-  updatePlayerTime: (time: number) => void
+export interface SliderProps extends ChakraSliderProps {
+  updateGlobalNum: (time: number) => void
 }
 
-export default function Slider({ max, value, updatePlayerTime }: SliderProps) {
+export default function Slider({
+  max,
+  value,
+  orientation,
+  minH,
+  updateGlobalNum: updatePlayerTime,
+}: SliderProps) {
   return (
     <ChakraSlider
+      minH={minH}
+      orientation={orientation}
       min={0}
       max={max}
       value={value}
